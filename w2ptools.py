@@ -18,6 +18,29 @@ installation folder.
 """
 
 
+class CloneToDir(object):
+
+    """
+    Use rsync to clone the contents of a web2py app folder (web2py/applications/<appname>)
+    to a folder outside the web2py directory, ignoring .git files.
+
+    This class was motivated by the need to maintain a separate GIT repository
+    for the production versions of apps published on fluxflex.com.
+    """
+
+    def __init__(self):
+        pass
+
+    def clone(self, app, target_path):
+        """
+        Use rsync to clone the contents of a web2py app folder (web2py/applications/<appname>)
+        to a folder outside the web2py directory, ignoring .git files.
+        """
+        rsync -avz --exclude ".git/*"
+        app_path = os.join('applications', app)
+        target_path = os.join('../', app, app_path, target_path)
+
+
 class PluginSync(object):
     """Synchronize plugins within a single web2py directory"""
 
